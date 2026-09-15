@@ -10,9 +10,10 @@
 		"PATH": "/home/vscode/.local/share/mise/shims:${containerEnv:PATH}"
 	},
 	"mounts": [
-		"source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind"
+		"source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind",
+		"source=${localWorkspaceFolder},target=/repo,type=bind"
 	],
 	"workspaceMount": "source=${localEnv:HOME}/workspaces,target=/workspaces,type=bind",
 	"workspaceFolder": "/workspaces",
-	"postCreateCommand": "scripts/setup"
+	"postCreateCommand": "/repo/scripts/setup"
 }
