@@ -3,5 +3,5 @@
 type = "archive"
 
 url = "https://github.com/LazyVim/starter/archive/refs/heads/main.tar.gz"
-BtripComponents = 1
+stripComponents = 1
 exclude = ["**/options.lua"]
