@@ -16,6 +16,6 @@ RUN echo 'eval "$(mise activate bash)"' >> /home/juanes/.bashrc
 # pre-create the Copilot auth dir so the named volume mounted there is owned by juanes
 RUN install -d -o juanes -g juanes /home/juanes/.config /home/juanes/.config/github-copilot
 
-WORKDIR /workspaces
+WORKDIR /workspaces/devcontainer
 
 USER juanes
