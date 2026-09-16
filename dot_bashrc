@@ -19,5 +19,9 @@ fi
 
 set -o vi
 
+if [ -f "$HOME/.config/theme/theme.sh" ]; then
+	source "$HOME/.config/theme/theme.sh"
+fi
+
 eval "$(mise activate bash)"
 eval "$(starship init bash)"

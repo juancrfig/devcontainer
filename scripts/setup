@@ -6,12 +6,11 @@ script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 cd "$script_dir/.."
 
 if ! command -v chezmoi >/dev/null; then
-    mkdir -p ~/.ssh
-    ssh-keyscan -H github.com >> ~/.ssh/known_hosts 2>/dev/null
-    sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply \
+    mkdir -p "$HOME/.local/bin"
+    BINDIR="$HOME/.local/bin" sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply \
         --no-tty \
         --promptString 'What is your git name?=Juanes Figueroa,What is your git email?=juancrfig@gmail.com' \
-        git@github.com:juancrfig/devcontainer.git
+        https://github.com/juancrfig/devcontainer.git
 fi
 
 /usr/local/bin/mise trust mise.toml && /usr/local/bin/mise install
