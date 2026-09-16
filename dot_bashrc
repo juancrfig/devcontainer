@@ -19,6 +19,15 @@ fi
 
 set -o vi
 
+# `devpod ssh` always starts in /workspaces/<workspace id>, ignoring
+# workspaceFolder. Land on the workspaces root instead, but only in the
+# session's first shell so subshells and tmux panes keep their directory.
+if [ -z "$WORKSPACES_LANDED" ] && [ -n "$DEVPOD_WORKSPACE_ID" ] \
+	&& [ "$PWD" = "/workspaces/$DEVPOD_WORKSPACE_ID" ]; then
+	cd /workspaces
+fi
+export WORKSPACES_LANDED=1
+
 # Advertise 24-bit ("truecolor") support so apps (nvim, bat, delta, fzf,
 # git pagers, ...) emit exact RGB escape codes instead of quantizing to a
 # 256-color approximation. Only meaningful if the host terminal actually
