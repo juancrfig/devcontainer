@@ -29,5 +29,9 @@ if [ -f "$HOME/.config/theme/theme.sh" ]; then
 	source "$HOME/.config/theme/theme.sh"
 fi
 
+# The stock Ubuntu .bashrc normally defines this; ours replaces it entirely,
+# so pick it back up here to auto-colorize plain `ls` with LS_COLORS above.
+alias ls='ls --color=auto'
+
 eval "$(mise activate bash)"
 eval "$(starship init bash)"
