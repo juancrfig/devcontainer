@@ -19,6 +19,12 @@ fi
 
 set -o vi
 
+# Advertise 24-bit ("truecolor") support so apps (nvim, bat, delta, fzf,
+# git pagers, ...) emit exact RGB escape codes instead of quantizing to a
+# 256-color approximation. Only meaningful if the host terminal actually
+# renders truecolor; run `theme test` to check.
+export COLORTERM=truecolor
+
 if [ -f "$HOME/.config/theme/theme.sh" ]; then
 	source "$HOME/.config/theme/theme.sh"
 fi
