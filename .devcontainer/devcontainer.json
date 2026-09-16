@@ -15,8 +15,8 @@
 		"source=github-copilot,target=/home/juanes/.config/github-copilot,type=volume"
 	],
 	"initializeCommand": "${localWorkspaceFolder}/.devcontainer/link-workspace",
-	"workspaceMount": "source=${localWorkspaceFolder}/.devcontainer/.workspace,target=/workspaces/${localWorkspaceFolderBasename},type=bind",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"workspaceMount": "source=${localWorkspaceFolder}/.devcontainer/.workspace,target=/workspaces,type=bind",
+	"workspaceFolder": "/workspaces",
 	"remoteUser": "juanes",
 	"containerUser": "juanes",
 	"postCreateCommand": "/repo/scripts/setup",
