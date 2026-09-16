@@ -1,0 +1,17 @@
+#!/bin/bash
+# Runs on the host (initializeCommand) before the container is created.
+# Points .devcontainer/.workspace at the host dir that gets bind-mounted
+# on /workspaces: ~/Projects for user "tmp", ~/workspaces for everyone else.
+
+set -euo pipefail
+
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+
+if [ "$(id -un)" = "tmp" ]; then
+	target="$HOME/Projects"
+else
+	target="$HOME/workspaces"
+fi
+
+mkdir -p "$target"
+ln -sfn "$target" "$script_dir/.workspace"
