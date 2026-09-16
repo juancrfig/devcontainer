@@ -2,5 +2,4 @@
 neovim = "latest"
 starship = "latest"
 chezmoi = "latest"
-herdr = "latest"
 node = "latest"
