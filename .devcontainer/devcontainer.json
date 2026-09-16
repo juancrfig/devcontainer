@@ -7,15 +7,17 @@
 		"SSH_AUTH_SOCK": "/ssh-agent"
 	},
 	"remoteEnv": {
-		"PATH": "/home/vscode/.local/bin:/home/vscode/.local/share/mise/shims:${containerEnv:PATH}"
+		"PATH": "/home/juanes/.local/bin:/home/juanes/.local/share/mise/shims:${containerEnv:PATH}"
 	},
 	"mounts": [
 		"source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind",
 		"source=${localWorkspaceFolder},target=/repo,type=bind",
-		"source=github-copilot,target=/home/vscode/.config/github-copilot,type=volume"
+		"source=github-copilot,target=/home/juanes/.config/github-copilot,type=volume"
 	],
 	"workspaceMount": "source=${localEnv:HOME}/workspaces,target=/workspaces,type=bind",
 	"workspaceFolder": "/workspaces",
+	"remoteUser": "juanes",
+	"containerUser": "juanes",
 	"postCreateCommand": "/repo/scripts/setup",
 	"customizations": {
 		"vscode": {

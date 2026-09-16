@@ -9,8 +9,8 @@ It is intentionally small: the container image provides `mise`, `mise.toml` inst
 ## Repository layout
 
 - `.devcontainer/Dockerfile` builds from the Dev Containers Ubuntu base image and copies
-  the `mise` binary into the image. It activates mise for Bash in the `vscode` user's
-  shell configuration.
+  the `mise` binary into the image. It renames the base image's default `vscode` user to
+  `juanes` and activates mise for Bash in that user's shell configuration.
 - `.devcontainer/devcontainer.json` builds from the repository root and bind-mounts the
   host SSH agent socket at `/ssh-agent`.
 - `mise.toml` declares tools installed by mise. Keep tool versions explicit when
