@@ -59,6 +59,18 @@ vim.api.nvim_create_user_command("ThemeToggle", function()
 	set_theme(palette.mode() == "dark" and "light" or "dark")
 end, {})
 
+-- Render the current line as a thick underline in the theme fg instead of
+-- tokyonight's full-line background fill (see options.lua's cursorline
+-- settings). A ColorScheme autocommand re-applies it on startup AND on every
+-- :ThemeLight/:ThemeDark/:ThemeToggle switch, keeping it in sync with the
+-- active light/dark palette.
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		local p = palette.colors()
+		vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", fg = p.fg, underline = true })
+	end,
+})
+
 return {
 	{
 		"folke/tokyonight.nvim",
