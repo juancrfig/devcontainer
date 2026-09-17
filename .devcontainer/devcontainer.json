@@ -10,7 +10,7 @@
 		"PATH": "/home/juanes/.local/bin:/home/juanes/.local/share/mise/shims:${containerEnv:PATH}"
 	},
 	"mounts": [
-		"source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind",
+		"source=${localWorkspaceFolder}/.devcontainer/.ssh-agent.sock,target=/ssh-agent,type=bind",
 		"source=${localWorkspaceFolder},target=/repo,type=bind",
 		"source=github-copilot,target=/home/juanes/.config/github-copilot,type=volume"
 	],

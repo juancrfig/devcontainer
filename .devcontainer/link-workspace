@@ -15,3 +15,18 @@ fi
 
 mkdir -p "$target"
 ln -sfn "$target" "$script_dir/.workspace"
+
+# Refresh the SSH-agent bind-mount source. The devcontainer.json mounts a
+# stable path (.ssh-agent.sock symlink) on /ssh-agent; that symlink must point
+# at the CURRENT, live agent socket on every container start. DevPod's agent
+# socket (${localEnv:SSH_AUTH_SOCK}) is ephemeral — created per session and
+# removed afterward — so baking its absolute path into the container config
+# leaves a dead bind source that prevents the container from (re)starting.
+# This runs (initializeCommand) on the host before each start, so re-pointing
+# here guarantees docker always resolves to a live socket.
+agent_sock="${SSH_AUTH_SOCK:-}"
+if [ -n "$agent_sock" ] && [ -S "$agent_sock" ]; then
+	ln -sfn "$agent_sock" "$script_dir/.ssh-agent.sock"
+else
+	rm -f "$script_dir/.ssh-agent.sock"
+fi

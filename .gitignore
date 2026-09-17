@@ -1,2 +1,3 @@
 /bin/
 /.devcontainer/.workspace
+/.devcontainer/.ssh-agent.sock
