@@ -2,28 +2,25 @@
 
 if ! command -v devpod >/dev/null; then
 	echo "Installing DevPod..."
-	(curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64" && sudo install -c -m 0755 devpod /usr/local/bin && rm -f devpod) > /tmp/setup.log 2>&1
+	(curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64" && sudo install -c -m 0755 devpod /usr/local/bin && rm -f devpod) >/tmp/setup.log 2>&1
 	devpod ide use none
 	if [ $? -ne 0 ]; then
 		echo "Installation failed. Details: /tmp/setup.log"
 	fi
 fi
 
-
-
 if [ -z "$SSH_AUTH_SOCK" ]; then
-	eval "$(ssh-agent -s)" > /dev/null
+	eval "$(ssh-agent -s)" >/dev/null
 	ssh-add ~/.ssh/id_ed25519 2>/dev/null
 fi
-
 
 set -o vi
 
 # `devpod ssh` always starts in /workspaces/<workspace id>, ignoring
 # workspaceFolder. Land on the workspaces root instead, but only in the
 # session's first shell so subshells and tmux panes keep their directory.
-if [ -z "$WORKSPACES_LANDED" ] && [ -n "$DEVPOD_WORKSPACE_ID" ] \
-	&& [ "$PWD" = "/workspaces/$DEVPOD_WORKSPACE_ID" ]; then
+if [ -z "$WORKSPACES_LANDED" ] && [ -n "$DEVPOD_WORKSPACE_ID" ] &&
+	[ "$PWD" = "/workspaces/$DEVPOD_WORKSPACE_ID" ]; then
 	cd /workspaces
 fi
 export WORKSPACES_LANDED=1
@@ -44,3 +41,5 @@ alias ls='ls --color=auto'
 
 eval "$(mise activate bash)"
 eval "$(starship init bash)"
+
+alias v='nvim'
